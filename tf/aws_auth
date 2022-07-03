@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Access keys are generation per session, so values
+# need to be added during AWS session initialization.
+
+export AWS_ACCESS_KEY_ID="ASIA6NWQHZWT6O45LN75"
+export AWS_SECRET_ACCESS_KEY="ygCBJLaNBoojH45YWjiNXbyge2TNxxsRc0LFq10m"
+export AWS_SESSION_TOKEN="FwoGZXIvYXdzEGEaDMaWpCPLTJFYMxeJlyK2AYearmq9M6OQP7zFisc6JrHBW559vS44cAF/CNoU5yleG6DbOAggjb7Ja5LPvDJ/7lNp6/JVYEUWcStPu3g6YCeUFoRTWZJH+XQgDcz+lZx4poZfhQYul/sRlQ/chZWLSlLPwwGhF26GLQXnzSGviH966ym5QfpYO2dnwA9Yv381bsW1PYKeiNujkI+owNLzOZpqjcicKKy0TJleiyk2hFYtzA41PMdHi7nZkMuD40II/y1lnr7IKL3phpYGMi1WY7nkEKqdhRn45uiyhNyNtD/9uj7pFUF7zP66ohxBp5trMi/N2ScOWlIDfWU="
+
+echo "AWS Access Key = $AWS_ACCESS_KEY_ID"
+echo "AWS Secret Key = $AWS_SECRET_ACCESS_KEY"
+echo "AWS Security/Session Token = $AWS_SESSION_TOKEN"
