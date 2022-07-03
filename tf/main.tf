@@ -1,16 +1,17 @@
 resource "aws_instance" "ubuntu" {
   ami           = "ami-096fda3c22c1c990a"
   instance_type = "t2.micro"
+  count         = 3
   key_name      = "${aws_key_pair.generated_key.key_name}"
   vpc_security_group_ids = [aws_security_group.ab_sg.id]
 
   tags = {
-    Name = "terraform_instance"
+    Name = "terraform_instance${count.index+1}"
   }
 }
 
 output "myEC2IP" { 
-  value = "${aws_instance.ubuntu.public_ip}"
+  value = "${aws_instance.ubuntu.*.public_ip}"
 }
 
 resource "tls_private_key" "example" {
@@ -22,7 +23,7 @@ resource "aws_key_pair" "generated_key" {
   key_name   = "mykey1"
   public_key = tls_private_key.example.public_key_openssh
 
-  provisioner "local-exec" { 
+  provisioner "local-exec" {
     # Create "myKey.pem" on linux host controller
     command = "echo '${tls_private_key.example.private_key_pem}' > ./myKey.pem"
   }
