@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  creationTimestamp: null
+
+  labels:
+    app: mysqldb
+
+  name: deploy-mysqldb
+
+spec:
+  replicas: 1
+  
+  selector:
+    matchLabels:
+      app: mysqldb
+
+  strategy: {}
+
+  template:
+    metadata:
+      creationTimestamp: null
+
+      labels:
+        app: mysqldb
+
+    spec:
+      containers:
+      - image: docker.io/mysql:5.6
+
+        name: mysql
+
+        env:
+        - name: "MYSQL_DATABASE"
+          value: "simplilearn"
+
+        - name: "MYSQL_ROOT_PASSWORD"
+          value: "centos"
+
