@@ -34,7 +34,7 @@ spec:
 
         env:
         - name:  WORDPRESS_DB_HOST
-          value: mysqldb
+          value: deploy-mysqldb
 
         - name: WORDPRESS_DB_USER
           value: root
