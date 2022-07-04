@@ -1,8 +1,9 @@
 resource "aws_instance" "ubuntu" {
-  ami           = "ami-096fda3c22c1c990a"
-  instance_type = "t2.micro"
+  ami           = "ami-052efd3df9dad4825"
   count         = 3
+  instance_type = "t2.medium"
   key_name      = "${aws_key_pair.generated_key.key_name}"
+
   vpc_security_group_ids = [aws_security_group.ab_sg.id]
 
   tags = {
@@ -24,22 +25,22 @@ resource "aws_key_pair" "generated_key" {
   public_key = tls_private_key.example.public_key_openssh
 
   provisioner "local-exec" {
-    # Create "myKey.pem" on linux host controller
+    # Create "myKey.pem" on Linux host controller
     command = "echo '${tls_private_key.example.private_key_pem}' > ./myKey.pem"
   }
 }
 
 resource "aws_security_group" "ab_sg" {
   name   = "allow_ssh"
-  # VPC ID must match assigned value in AWS EC2
+  # Insert VPC ID of current AWS EC2 session
   vpc_id = ""
 
   ingress {
-    description      = "SSH from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "SSH from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
@@ -49,10 +50,10 @@ resource "aws_security_group" "ab_sg" {
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
+
   }
 
-  tags = {
-    Name = "allow_ssh"
-  }
+  tags = { Name = "allow_ssh" }
+
 }
 
